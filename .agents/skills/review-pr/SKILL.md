@@ -16,7 +16,13 @@ You receive: this skill, the project AGENTS.md, the rule files that apply to the
 
 ## Output
 
-Post **one PR review** with inline comments.
+Post **exactly one PR review** that contains all inline comments and the summary. Never post a comment or a review separately, and never post an empty review.
+
+How (one single call):
+
+1. Write a JSON file `review.json` with `{"event": "COMMENT", "body": "<summary table>", "comments": [{"path": "<file>", "line": <n>, "side": "RIGHT", "body": "[RULE-ID][severity] ..."}]}`. `line` must be a line of the new file that appears in the diff.
+2. Submit it once: `gh api repos/<owner>/<repo>/pulls/<number>/reviews --method POST --input review.json`.
+3. Do not use any other tool to post comments (no per-comment inline tool, no `gh pr comment`, no `gh pr review`). If the call fails because a line is not in the diff, fix that comment's line and submit again; only one successful review may exist.
 
 - Every inline comment starts with `[RULE-ID][blocker|major|minor]`, for example `[BE-010][major] ...`.
 - **No comment without a rule id.** If a concern maps to no rule, do not post it as a finding; mention it in the summary under "Suggest a rule".
