@@ -1,3 +1,4 @@
+using Clinic.Api.Appointments;
 using Clinic.Api.Patients;
 using Clinic.Api.Tenancy;
 using Clinic.Application;
@@ -20,6 +21,7 @@ app.UseMiddleware<TenantMiddleware>();
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapPatientEndpoints();
+app.MapAppointmentEndpoints();
 
 await app.RunAsync();
 

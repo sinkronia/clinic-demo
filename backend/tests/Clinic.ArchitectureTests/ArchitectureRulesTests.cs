@@ -35,7 +35,11 @@ public class ArchitectureRulesTests
     public void BE005_Every_domain_entity_implements_ITenantEntity()
     {
         // Technical, non-business types may be allowlisted here with a justification in the PR.
-        var allowlist = new HashSet<string>();
+        var allowlist = new HashSet<string>
+        {
+            // A value type, not a business entity; NetArchTest's AreClasses() also reports enums.
+            "Clinic.Domain.Appointments.AppointmentStatus",
+        };
 
         var result = Types.InAssembly(_domain)
             .That()
