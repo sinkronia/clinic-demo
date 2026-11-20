@@ -7,6 +7,7 @@ To add a term, propose it first (skill `propose-rule`).
 | --- | --- | --- |
 | Paciente | Patient | A person who receives care at a clinic. Archived, never deleted. |
 | Cita | Appointment | A scheduled visit of a patient to the clinic, with a start and an end. |
+| Sillón dental | DentalChair | The dental chair where an appointment takes place. An appointment uses one chair; appointments on the same chair cannot overlap. (Glossary proposal, confirmed in chat for issue #1.) |
 | Consultorio | Clinic | A dental clinic; the tenant of the system. |
 | Odontograma | Odontogram | Chart of a patient's teeth and their condition. |
 | Pieza | Tooth | One tooth of the odontogram. |

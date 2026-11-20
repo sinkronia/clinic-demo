@@ -28,4 +28,7 @@ public interface IPatientRepository
 
     /// <summary>Non-archived patients whose name, document or phone contains <paramref name="search"/>.</summary>
     Task<IReadOnlyList<Patient>> SearchAsync(string? search, CancellationToken ct);
+
+    /// <summary>True when a non-archived patient with this id exists in the tenant.</summary>
+    Task<bool> ExistsActiveAsync(Guid id, CancellationToken ct);
 }
