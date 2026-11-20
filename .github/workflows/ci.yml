@@ -11,15 +11,15 @@ permissions:
 
 jobs:
   dotnet:
-    uses: Sinkronia/code-standards/.github/workflows/ci-dotnet.yml@v0.1.1
+    uses: Sinkronia/code-standards/.github/workflows/ci-dotnet.yml@v0.1.2
     with:
       solution: backend/Clinic.sln
 
   security:
-    uses: Sinkronia/code-standards/.github/workflows/security.yml@v0.1.1
+    uses: Sinkronia/code-standards/.github/workflows/security.yml@v0.1.2
 
   rules:
-    uses: Sinkronia/code-standards/.github/workflows/rules.yml@v0.1.1
+    uses: Sinkronia/code-standards/.github/workflows/rules.yml@v0.1.2
 
   ai-review:
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'ai-review')
@@ -27,7 +27,7 @@ jobs:
       contents: read
       pull-requests: write
       id-token: write
-    uses: Sinkronia/code-standards/.github/workflows/ai-review.yml@v0.1.1
+    uses: Sinkronia/code-standards/.github/workflows/ai-review.yml@v0.1.2
     secrets: inherit
 
   ci-ok:
