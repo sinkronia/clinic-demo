@@ -1,0 +1,4 @@
+# EF Core generates these files (rule BE-011: never edit a merged migration).
+[*.cs]
+generated_code = true
+end_of_line = unset

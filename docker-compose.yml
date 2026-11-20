@@ -1,0 +1,15 @@
+# Local development database. Throwaway credentials, never used outside your machine.
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: clinic
+      POSTGRES_PASSWORD: clinic
+      POSTGRES_DB: clinic
+    ports:
+      - "5432:5432"
+    volumes:
+      - clinic-db:/var/lib/postgresql
+
+volumes:
+  clinic-db:
