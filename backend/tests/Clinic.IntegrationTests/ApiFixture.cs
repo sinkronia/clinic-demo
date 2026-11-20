@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Time.Testing;
+using Npgsql;
 using Testcontainers.PostgreSql;
 
 namespace Clinic.IntegrationTests;
@@ -35,6 +36,16 @@ public sealed class ApiFixture : IAsyncLifetime, IDisposable
         }
 
         return client;
+    }
+
+    /// <summary>There is no archive endpoint yet, so tests archive a patient directly in the database.</summary>
+    public async Task ArchivePatientAsync(Guid patientId)
+    {
+        await using var connection = new NpgsqlConnection(_postgres.GetConnectionString());
+        await connection.OpenAsync();
+        await using var command = new NpgsqlCommand("UPDATE patients SET \"ArchivedAt\" = now() WHERE \"Id\" = @id", connection);
+        command.Parameters.AddWithValue("id", patientId);
+        await command.ExecuteNonQueryAsync();
     }
 
     private sealed class ApiFactory(string connectionString, FakeTimeProvider time) : WebApplicationFactory<Program>

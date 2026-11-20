@@ -1,3 +1,4 @@
+using Clinic.Application.Appointments;
 using Clinic.Application.Idempotency;
 using Clinic.Application.Patients;
 using Clinic.Infrastructure.Persistence;
@@ -15,6 +16,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Clinic")
                 ?? throw new InvalidOperationException("Connection string 'Clinic' is not configured.")));
         services.AddScoped<IPatientRepository, PatientRepository>();
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
         services.AddScoped<IIdempotencyStore, IdempotencyStore>();
         return services;
     }
