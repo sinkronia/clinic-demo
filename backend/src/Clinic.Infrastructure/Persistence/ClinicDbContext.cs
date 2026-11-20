@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using Clinic.Application.Abstractions;
 using Clinic.Domain;
+using Clinic.Domain.Appointments;
 using Clinic.Domain.Idempotency;
 using Clinic.Domain.Patients;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ namespace Clinic.Infrastructure.Persistence;
 public sealed class ClinicDbContext(DbContextOptions<ClinicDbContext> options, ITenantContext tenant) : DbContext(options)
 {
     public DbSet<Patient> Patients => Set<Patient>();
+
+    public DbSet<Appointment> Appointments => Set<Appointment>();
 
     public DbSet<IdempotencyRecord> IdempotencyRecords => Set<IdempotencyRecord>();
 

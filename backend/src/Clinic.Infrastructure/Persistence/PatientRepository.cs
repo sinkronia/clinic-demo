@@ -22,6 +22,9 @@ internal sealed class PatientRepository(ClinicDbContext db) : IPatientRepository
         }
     }
 
+    public Task<bool> ExistsActiveAsync(Guid id, CancellationToken ct) =>
+        db.Patients.AsNoTracking().AnyAsync(p => p.Id == id && p.ArchivedAt == null, ct);
+
     public async Task<IReadOnlyList<Patient>> SearchAsync(string? search, CancellationToken ct)
     {
         var query = db.Patients.AsNoTracking().Where(p => p.ArchivedAt == null);
